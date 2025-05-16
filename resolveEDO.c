@@ -8,7 +8,7 @@
 
 int main(void) {
     // inicializa LIKWID markers
-    //LIKWID_MARKER_INIT;
+    LIKWID_MARKER_INIT;
     
 
     EDo edoeq;
@@ -33,12 +33,12 @@ int main(void) {
 
         factor_LU(sl, eq_count);
 
-        //string_t sol_mark = markerName("SOL", eq_count);
+        string_t sol_mark = markerName("SOL", eq_count);
         rtime_t t0 = timestamp();
-        //LIKWID_MARKER_START(sol_mark);
+        LIKWID_MARKER_START(sol_mark);
         real_t *sol = solve_tridiag(sl);
-        //LIKWID_MARKER_STOP(sol_mark);
-        //free(sol_mark);    
+        LIKWID_MARKER_STOP(sol_mark);
+        free(sol_mark);    
 
         printf("\n");
         for (int i = 0; i < sl->n; ++i)
@@ -56,6 +56,6 @@ int main(void) {
     }
 
     // relatório LIKWID
-    //LIKWID_MARKER_CLOSE;
+    LIKWID_MARKER_CLOSE;
     return 0;
 }
