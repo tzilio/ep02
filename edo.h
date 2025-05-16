@@ -24,7 +24,7 @@ typedef struct {
 Tridiag *genTridiag (EDo *edoeq);
 void prnEDOsl (EDo *edoeq);
 
-void factor_LU(Tridiag *sl);
+void factor_LU(Tridiag *sl, int eq_count);
 real_t *solve_tridiag(Tridiag *sl);
 
 void free_tridiag(Tridiag *sl);

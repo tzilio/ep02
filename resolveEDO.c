@@ -31,11 +31,7 @@ int main(void) {
         Tridiag *sl = genTridiag(&edoeq);
         prnEDOsl(&edoeq);
 
-        //string_t lu_mark = markerName("LU", eq_count);
-        //LIKWID_MARKER_START(lu_mark);
-        factor_LU(sl);
-        //LIKWID_MARKER_STOP(lu_mark);
-        //free(lu_mark);
+        factor_LU(sl, eq_count);
 
         //string_t sol_mark = markerName("SOL", eq_count);
         rtime_t t0 = timestamp();

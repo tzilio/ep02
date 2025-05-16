@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <likwid.h>
 
 #include "utils.h"
 #include "edo.h"
@@ -78,11 +79,22 @@ void prnEDOsl (EDo *edoeq)
   }
 }
 
-void factor_LU(Tridiag *sl) {
+void factor_LU(Tridiag *sl, int eq_count) {
   int n = sl->n;
   for (int i = 1; i < n; i++) {
+    //likwid para L
+    string_t l_mark = markerName("L", eq_count);
+    LIKWID_MARKER_START(l_mark);
     sl->Di[i] /= sl->D[i-1];
+    LIKWID_MARKER_STOP(l_mark);
+    free(l_mark);
+
+    //likwid para U
+    string_t u_mark = markerName("U", eq_count);
+    LIKWID_MARKER_START(u_mark);
     sl->D[i] -= sl->Di[i] * sl->Ds[i-1];
+    LIKWID_MARKER_STOP(u_mark);
+    free(u_mark);
   }
 }
 
