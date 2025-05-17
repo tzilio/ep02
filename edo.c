@@ -1,3 +1,5 @@
+// THIAGO ZILIO GRR202342
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
@@ -101,6 +103,7 @@ real_t *solve_tridiag(Tridiag *sl) {
   x[n-1] = y[n-1] / sl->D[n-1];
   for (int i = n-2; i >=0; --i) x[i] = (y[i] - sl->Ds[i] * x[i+1]) / sl->D[i];
 
+  free(y);
   return x;
 }
 

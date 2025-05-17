@@ -1,3 +1,5 @@
+// THIAGO ZILIO GRR20234265
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fenv.h>
@@ -8,7 +10,7 @@
 
 int main(void) {
     // inicializa LIKWID markers
-    //LIKWID_MARKER_INIT;
+    LIKWID_MARKER_INIT;
     
 
     EDo edoeq;
@@ -31,18 +33,18 @@ int main(void) {
         Tridiag *sl = genTridiag(&edoeq);
         prnEDOsl(&edoeq);
 
-        //string_t lu_mark = markerName("LU", eq_count);
-        //LIKWID_MARKER_START(lu_mark);
+        string_t lu_mark = markerName("LU", eq_count);
+        LIKWID_MARKER_START(lu_mark);
         factor_LU(sl);
-        //LIKWID_MARKER_STOP(lu_mark);
-        //free(lu_mark);
+        LIKWID_MARKER_STOP(lu_mark);
+        free(lu_mark);
 
-        //string_t sol_mark = markerName("SOL", eq_count);
+        string_t sol_mark = markerName("SOL", eq_count);
         rtime_t t0 = timestamp();
-        //LIKWID_MARKER_START(sol_mark);
+        LIKWID_MARKER_START(sol_mark);
         real_t *sol = solve_tridiag(sl);
-        //LIKWID_MARKER_STOP(sol_mark);
-        //free(sol_mark);    
+        LIKWID_MARKER_STOP(sol_mark);
+        free(sol_mark);    
 
         printf("\n");
         for (int i = 0; i < sl->n; ++i)
@@ -60,6 +62,6 @@ int main(void) {
     }
 
     // relatório LIKWID
-    //LIKWID_MARKER_CLOSE;
+    LIKWID_MARKER_CLOSE;
     return 0;
 }
